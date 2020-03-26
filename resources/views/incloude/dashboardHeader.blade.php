@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <style>
 .sidebar.toggled {
     transition: width 0.4s;
@@ -14,7 +14,23 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
-   
+  <style>
+      input[type="file"] {
+  position: absolute;
+  z-index: -1;
+  top: 6px;
+  left: 0;
+  font-size: 15px;
+  color: rgb(153,153,153);
+}
+.uploadfiletext{
+    color: black ;
+}
+.uploadfiletext:hover{
+    color: red !important;
+    cursor: pointer;
+}
+  </style>
 </head>
 
 <body id="page-top" >
@@ -23,11 +39,13 @@
             <div class="container-fluid d-flex flex-column p-0">
                 <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                     <div class="sidebar-brand-icon rotate-n-15"></div>
-                    <div class="sidebar-brand-text mx-3"><span>Sport's house</span></div>
+                <div class="sidebar-brand-text mx-3"><span> @php echo \App\Http\Controllers\SettingController::returningSiteName();
+                    @endphp
+                    </span></div>
                 </a><img class="justify-content-center align-items-center" src="{{asset('assets/img/nonamesph.png?h=14bd0f9bce9c8e844b6e8d465ecb1798')}}" style="width: 53px;height: 46px;margin-bottom: 10px;">
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('home')}}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="table.html"><i class="fas fa-table"></i><span>Users</span></a></li>
                     <li class="nav-item" role="presentation"></li>
@@ -35,6 +53,7 @@
                 <li class="nav-item" role="presentation"><a class="nav-link " href="{{route('products')}}"><i class="fas fa-dolly-flatbed"></i><span>Products</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('categories')}}"><i class="fab fa-creative-commons-nd"></i><span>Catigories</span></a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('tags')}}"><i class="fas fa-tags"></i><span>Tags</span></a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('setting')}}"><i class="fas fa-cog"></i><span>Setting</span></a></li>
                     <li class="nav-item" role="presentation"></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>

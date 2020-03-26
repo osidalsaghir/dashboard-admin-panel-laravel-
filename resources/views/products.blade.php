@@ -28,15 +28,37 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group"><label for="name"><strong>Product Name</strong></label><input class="form-control" type="text" placeholder="Product Name" name="name"></div>
-                                        <div class="form-group"><label for="tag"><strong>Tag</strong></label><input class="form-control" type="email" placeholder="Tag" name="tag"></div>
-                                        <div class="form-group"><label for="Category"><strong>Category</strong></label><input class="form-control" type="text" placeholder="Category" name="Category"></div>
+                                        <label for="exampleFormControlSelect1">Tags</label>
+                                        @foreach ($tags as $tag)
+                                            
+                                       
+                                        <!--tags--> 
+                                        <div class="form-check">
+                                        <input class="form-check-input"name="tags[]" type="checkbox" value="{{$tag->id}}" id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                              {{$tag->name}}
+                                            </label>
+                                          </div>
+                                          
+                                          @endforeach
+                                        <!--end tags--> 
+                                          <br>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlSelect1">Category</label>
+                                            <select class="form-control" id="exampleFormControlSelect1" name="category_id">
+                                                @foreach ($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                                @endforeach
+                                            </select>
+                                          </div>
                                         <div class="form-group"><label for="price"><strong>Price</strong></label><input class="form-control" type="text" style="width: 167px;" name="price"><select class="form-control" style="width: 80px;margin-top: 11px;" name="priceType"><optgroup><option value="$" selected="">$</option><option value="TL">TL</option><option value="SYP">SYP</option></optgroup></select></div>
                                     </div>
                                     <div class="col"><label for="status"><strong>Status</strong><br></label><select name="status" class="form-control" style="margin-top: 0px;"><optgroup><option value="1" selected>0nline</option><option value="0">Offline</option></optgroup></select><br><label for="content"><strong>Content</strong><br></label><textarea class="form-control" style="margin-bottom: 12px;" name="content"></textarea>
                                         <div
                                             class="form-group"><label for="photos"><strong>Photos</strong></label>
                                         <br>
-                                        <input type="file" name="picture">
+                                        <label class ="new-button text-center uploadfiletext" style="color : black; for="upload"> Upload picture
+                                            <input id="upload" type="file" name="picture">
                                     </div>
                                 </div>
                         </div>
@@ -90,10 +112,10 @@
                                         <a href="{{route('products.delete' , ['id' => $product->id])}}"><i class="material-icons">delete</i></a></td>
                                         <td><a href="{{route('products.edit' , ['id' => $product->id])}}"> <i  class="material-icons">edit</i></a></td>
                                         @if($product->status == 0 )
-                                        <td>offline</td>
+                                        <td><a href="{{route('products.changestate' , ['id' => $product->id])}}"> offline</a></td>
                                         @endif
                                         @if($product->status == 1 )
-                                        <td>online</td>
+                                        <td> <a href="{{route('products.changestate' , ['id' => $product->id])}}"> online</a></td>
                                         @endif
                                     </tr>
                                 @endforeach

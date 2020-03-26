@@ -67,7 +67,7 @@
                                         <td>{{$tag->id}}</td>
                                             <td>{{$tag->name}}</td>
                                         <td><a href="{{route('tags.delete' , ['id' => $tag->id])}}"><i class="material-icons">delete</i></a></td>
-                                            <td><a href="editTag.html"> <i  class="material-icons">edit</i></a></td>
+                                            <td><a href="{{route('tags.edit' , ['id' => $tag->id])}}"> <i  class="material-icons">edit</i></a></td>
                                         </tr>
                                         @endforeach
                                         <tr></tr>

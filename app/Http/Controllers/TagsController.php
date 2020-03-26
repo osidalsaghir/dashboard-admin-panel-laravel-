@@ -63,7 +63,7 @@ class TagsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('editTag')->with('tag', Tag::find($id));
     }
 
     /**
@@ -75,7 +75,10 @@ class TagsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tag = Tag::find($id);
+        $tag->name = $request->name ; 
+        $tag->save();
+        return redirect()->route('tags');
     }
 
     /**

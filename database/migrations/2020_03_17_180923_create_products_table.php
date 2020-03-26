@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->boolean('status');
             // $table->string('tag');
-            // $table->string('category');
+            $table->string('category_id');
             $table->text('content');
             $table->string('picture');
             $table->float('price');

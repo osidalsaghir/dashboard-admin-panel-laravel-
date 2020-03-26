@@ -1,6 +1,7 @@
 <footer class="bg-white sticky-footer">
     <div class="container my-auto">
-        <div class="text-center my-auto copyright"><span>Copyright © Sport&#39;s House2020</span> <br><br><span>&nbsp; Developer Osid Alsagir</span></div>
+        <div class="text-center my-auto copyright"><span>Copyright © @php echo \App\Http\Controllers\SettingController::returningSiteName();
+            @endphp 2020</span> <br><br><span>&nbsp; Developer Osid Alsagir</span></div>
     </div>
 </footer>
 </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
@@ -25,6 +26,7 @@
             
 
             </script>
+           
 </body>
 
 </html>

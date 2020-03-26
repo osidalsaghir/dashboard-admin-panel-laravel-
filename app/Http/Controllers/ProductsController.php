@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Category;
+use App\Tag;
+
 use Illuminate\Support\Facades\File;
 class ProductsController extends Controller
 {
@@ -14,7 +17,10 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('products') ->with( "products",Product::all());
+        return view('products') 
+        ->with( "products",Product::all())
+        ->with( "categories",Category::all())
+        ->with( "tags",Tag::all());
     }
 
     /**
@@ -56,9 +62,12 @@ class ProductsController extends Controller
         $product->content =  $request->content;
         $product->price =  $request->price;
         $product->priceType =  $request->priceType;
+        $product->category_id = $request->category_id;
         $product->save();
     
-        return redirect()->back()->with('done' ,'The product has been added successfully');
+        return redirect()->back()->with('done' ,'The product has been added successfully')
+        ->with( "categories",Category::all())
+        ->with( "tags",Tag::all());
     }
 
     /**
@@ -119,7 +128,9 @@ class ProductsController extends Controller
         $product->priceType =  $request->priceType;
         $product->save();
     
-        return redirect()->route('products')->with('done' ,'The product '.$request->name.' has been updated successfully');
+        return redirect()->route('products')->with('done' ,'The product '.$request->name.' has been updated successfully')
+        ->with( "categories",Category::all())
+        ->with( "tags",Tag::all());
     }
 
     /**
@@ -136,7 +147,27 @@ class ProductsController extends Controller
         if(File::exists($image_path)) {
             File::delete($image_path);
         }
+        $deletedProductName = $product->name ; 
         $product->delete($id);
-        return redirect()->back();
+        return redirect()->back()->with( "tags",Tag::all())->with( "categories",Category::all()) ->with('done' ,'The product '.$deletedProductName.' has been deleted successfully');
+    }
+    public function changestate($id)
+    {   
+        
+        $product = Product::find($id);
+
+        if($product->status == 1){
+            $product->status =0;
+            $product->save();
+            $state = 'offline' ; 
+        }
+        else{
+            $product->status =1;
+            $product->save();
+            $state = 'online' ; 
+        }
+
+         return redirect()->route('products')->with( "tags",Tag::all())->with( "categories",Category::all())->with('done' ,'The product '.$product->name.'\'s status has been updated to '.$state.' successfully');
+
     }
 }

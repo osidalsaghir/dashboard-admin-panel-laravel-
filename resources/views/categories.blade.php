@@ -69,7 +69,7 @@
                                         <td>{{$category->id}}</td>
                                             <td>{{$category->name}}</td>
                                         <td><a href="{{route('categories.delete' , ['id' => $category->id])}}"><i class="material-icons">delete</i></a></td>
-                                            <td><a href="editCategory.html"> <i  class="material-icons">edit</i></a></td>
+                                        <td><a href="{{route('categories.edit' , ['id' => $category->id])}}"> <i  class="material-icons">edit</i></a></td>
                                         </tr>
                                        
                                         @endforeach
