@@ -90,4 +90,26 @@ class SettingController extends Controller
         $setting = Setting::first();
         return $setting->sitename;
     }
+    static function returningSiteLogo()
+    {
+        $setting = Setting::first();
+        return $setting->logo;
+    }
+    public function storeLogo(Request $request)
+    {
+        $this -> validate($request ,[
+            
+            "picture" => "required | image" , 
+        ]);
+        $picture = $request->picture;
+        $picture_new_name = time().$picture->getClientOriginalName();
+        $picture->move('uploads/logos',$picture_new_name);
+
+
+        $setting = Setting::first();
+        $setting->logo = 'uploads/logos/'.$picture_new_name;
+        $setting->save();
+        
+        return redirect()->back()->with('done' ,'The logo has been changed successfully');
+    }
 }

@@ -48,6 +48,7 @@ class ProductsController extends Controller
             "content" => "required" ,
             "price" => "required" ,
             "priceType" => "required" ,
+            "tags" => "required" ,
             "picture" => "required | image" , 
         ]);
         $picture = $request->picture;
@@ -64,7 +65,7 @@ class ProductsController extends Controller
         $product->priceType =  $request->priceType;
         $product->category_id = $request->category_id;
         $product->save();
-    
+        $product->tags()->attach($request->tags);
         return redirect()->back()->with('done' ,'The product has been added successfully')
         ->with( "categories",Category::all())
         ->with( "tags",Tag::all());
@@ -170,4 +171,5 @@ class ProductsController extends Controller
          return redirect()->route('products')->with( "tags",Tag::all())->with( "categories",Category::all())->with('done' ,'The product '.$product->name.'\'s status has been updated to '.$state.' successfully');
 
     }
+    
 }

@@ -7,17 +7,24 @@
         <div class="row  justify-content-center align-items-center">
             <div class="col-md-6 justify-content-center align-items-center">
                 <div class="card" style="width: 18rem;">
-                    <img src="{{asset('assets/img/nonamesph.png?h=14bd0f9bce9c8e844b6e8d465ecb1798')}}" class="card-img-top" alt="..."> 
+                    <img src="@php echo \App\Http\Controllers\SettingController::returningSiteLogo();
+                    @endphp" class="card-img-top" alt="..."> 
                    <br><br>
-                <label class ="new-button text-center uploadfiletext" style="color : black; for="upload"> Change logo
-                    <input id="upload" type="file" >
-
+                 
 
 
 
 
                     
                   </div>
+                  <form  method="POST" action="{{route('setting.save.logo')}}" enctype="multipart/form-data">
+                    @csrf
+                    <br>
+              
+                    <input id="upload" type="file" name="picture" >
+                    <div class="form-group" style="margin-top: 18px;"><button class="btn btn-primary btn-sm" type="submit" style="background-color: rgb(91,9,9);">Change Logo</button></div>
+
+                </form>
                   <br>
                     <br>
 
@@ -36,7 +43,7 @@
     
         <br>
         <br>
-      <form  method="POST" action="{{route('setting.save')}}">
+      <form  method="POST" action="{{route('setting.save')}}" >
           @csrf
         <div class="accordion " id="accordionExample">
             <div class="card">

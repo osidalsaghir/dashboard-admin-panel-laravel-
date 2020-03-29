@@ -105,7 +105,7 @@
                                     <tr>
                                     <td>{{$product->id}}</td>
                                         <td>{{$product->name}}</td>
-                                        <td>FALAN&nbsp; - FISTAN&nbsp;</td>
+                                        <td>  @foreach ($product->tags as $tag){{$tag->name}} ,  @endforeach</td>
                                         <td>{{$product->price}} {{$product->priceType}}</td>
                                         <td>CAT</td>
                                         <td>

@@ -14,23 +14,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
-  <style>
-      input[type="file"] {
-  position: absolute;
-  z-index: -1;
-  top: 6px;
-  left: 0;
-  font-size: 15px;
-  color: rgb(153,153,153);
-}
-.uploadfiletext{
-    color: black ;
-}
-.uploadfiletext:hover{
-    color: red !important;
-    cursor: pointer;
-}
-  </style>
+  
 </head>
 
 <body id="page-top" >
@@ -42,12 +26,13 @@
                 <div class="sidebar-brand-text mx-3"><span> @php echo \App\Http\Controllers\SettingController::returningSiteName();
                     @endphp
                     </span></div>
-                </a><img class="justify-content-center align-items-center" src="{{asset('assets/img/nonamesph.png?h=14bd0f9bce9c8e844b6e8d465ecb1798')}}" style="width: 53px;height: 46px;margin-bottom: 10px;">
+                </a><img class="justify-content-center align-items-center" src="@php echo \App\Http\Controllers\SettingController::returningSiteLogo();
+                    @endphp" style="width: 53px;height: 46px;margin-bottom: 10px;">
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('home')}}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="table.html"><i class="fas fa-table"></i><span>Users</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('profile')}}"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('users')}}"><i class="fas fa-table"></i><span>Users</span></a></li>
                     <li class="nav-item" role="presentation"></li>
                     <li class="nav-item" role="presentation"></li>
                 <li class="nav-item" role="presentation"><a class="nav-link " href="{{route('products')}}"><i class="fas fa-dolly-flatbed"></i><span>Products</span></a></li>
@@ -78,11 +63,21 @@
                                 <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown"></div>
                             </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
-                            <li class="nav-item dropdown no-arrow" role="presentation"><div class="nav-item dropdown no-arrow"><a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle nav-link" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="{{asset('assets/img/avatars/avatar1.jpeg?h=0ecc82101fb9a10ca459432faa8c0656')}}" /></a>
+                            <li class="nav-item dropdown no-arrow" role="presentation"><div class="nav-item dropdown no-arrow"><a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle nav-link" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">{{Auth::user()->name}}</span><img class="border rounded-circle img-profile" src="{{asset('assets/img/avatars/avatar1.jpeg?h=0ecc82101fb9a10ca459432faa8c0656')}}" /></a>
                     <div
                         role="menu" class="dropdown-menu shadow dropdown-menu-right animated--grow-in">
-                            <a role="presentation" class="dropdown-item" href="login.html"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout</a></div>
+                        
+                            <a role="presentation" class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                    </div>
                 </div></li>
                         </ul>
                     </div>
                 </nav>
+
+
+               

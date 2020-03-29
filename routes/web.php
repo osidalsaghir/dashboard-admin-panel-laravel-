@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::group(["middleware" => ["auth"]] , function(){
 Route::get('/home', 'HomeController@index')->name('home');
 
 /*products routes */
@@ -47,3 +47,20 @@ Route::get('/tags/edit/{id}', 'TagsController@edit')->name('tags.edit');
 /*setting routes */
 Route::get('/setting', 'SettingController@index')->name('setting');
 Route::post('/setting/save', 'SettingController@store')->name('setting.save');
+Route::post('/setting/save/changelogo', 'SettingController@storeLogo')->name('setting.save.logo');
+
+
+
+/*profile routes */
+Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::post('/profile/contantchange', 'ProfileController@storeContent')->name('profile.contantchange');
+Route::post('/profile/footerchange', 'ProfileController@storeFooter')->name('profile.footerchange');
+Route::post('/profile/userchange/{id}', 'ProfileController@storeUserSetting')->name('profile.userchange');
+
+
+/*users routes */
+Route::get('/users', 'UsersAdminController@index')->name('users');
+
+
+
+});
